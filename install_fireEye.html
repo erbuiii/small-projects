@@ -1,0 +1,246 @@
+<html style="font-size: 40px">
+<meta charset="utf-8">
+<title>下载</title>
+<link rel="stylesheet" href="iconfont/iconfont.css">
+<script src="libs/jquery-3.3.1.min.js"></script>
+<script>
+    $(window).on("load", function () {
+        // 判断是否在微信浏览器内
+        function is_weixin() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        var isWeixin = is_weixin();
+
+        // if (true) {
+        if (isWeixin) {
+            $('.wxTip').css('display', 'block');
+        } else {
+            //显示安装
+            console.log('浏览器');
+            $(".install").show();
+        }
+        // 判断手机系统
+        var u = navigator.userAgent;
+        var device = "";
+
+        if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+            device = "Android";
+            $(".install").prepend('<i class="iconfont icon-anzhuologo"></i>');
+        } else if (u.indexOf('iPhone') > -1) {
+            device = "iOS";
+            $(".install").prepend('<i class="iconfont icon-pingguo"></i>');
+            $(".download-tips").show();
+        }
+
+        $("#device").append("适用于" + device + "设备");
+
+        $(".install").click(function () {
+            if (device == "Android") {
+                window.location.href =
+                    "http://promotion.elong.com/FireEye/android-update/app-release.apk";
+            } else if (device == "iOS") {
+                window.location.href =
+                    "itms-services://?action=download-manifest&amp;url=https://promotion.elong.com/FireEye/FireEye.plist";
+            }
+        })
+
+
+    })
+</script>
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    ul,
+    li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    body {
+        /* background: #fe8c00;
+        background: -webkit-linear-gradient(to bottom, #ed4d33, #fe8c00);
+        background: linear-gradient(to bottom, #ed4d33, #fe8c00); */
+        color: #666;
+    }
+
+    .container {
+        margin: 0 1rem;
+    }
+
+    .description {
+        height: 3rem;
+        font-size: .8rem;
+        margin-top: .4rem;
+        margin-bottom: 2rem;
+    }
+
+    .icon {
+        margin-top: 2rem;
+        height: 300px;
+        width: 300px;
+        border-radius: 30px;
+        -webkit-box-shadow: 0px 10px 20px #c8c8c8;
+        -moz-box-shadow: 0px 10px 20px #c8c8c8;
+        box-shadow: 0px 10px 20px #c8c8c8;
+        /* inset 0px 7px 8px #7ad9fa, inset 0px -8px 6px #0059bd; */
+    }
+
+    .iconfont {
+        font-size: 1.8rem;
+        margin-right: 0.6rem;
+        vertical-align: sub;
+    }
+
+    .wxtip {
+        background: rgba(0, 0, 0, 0.8);
+        text-align: center;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 998;
+        display: none;
+    }
+
+    .wxtip-icon {
+        width: 3rem;
+        height: 4rem;
+        background: url(imgs/weixin-tip.png) no-repeat;
+        background-size: contain;
+        display: block;
+        position: absolute;
+        right: 1.8rem;
+        top: 1.2rem;
+    }
+
+    .wxtip-txt {
+        margin-top: 7rem;
+        color: #fff;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .install {
+        display: none;
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.2rem;
+        color: #fff;
+        background-color: #FF8405;
+        border-radius: .4rem;
+        margin: .6rem 0;
+    }
+
+    .download span {
+        color: #888;
+        font-size: .9rem;
+    }
+
+    .download-tips {
+        display: none;
+        font-size: 20px;
+    }
+
+    .update-tips {
+        padding: .2rem 1.2rem;
+        border: 1px solid #ddd;
+        border-radius: .4rem;
+        text-align: left;
+        color: #666;
+    }
+
+    .update-tips p {
+        font-size: 20px;
+    }
+
+    .history-version {
+        text-align: left;
+        padding: .2rem 0rem;
+        margin: 3rem 0;
+        border: 1px solid #ddd;
+        border-radius: .4rem;
+        color: #666;
+    }
+    .history-version h5 {
+        padding: 0 1.2rem;
+    }
+    .history-version li {
+        font-size: 20px;
+        padding: .4rem 1.2rem;
+    }
+    .history-version li:nth-child(2n-1) {
+        background: #fffef4;
+    }
+</style>
+
+<body style="text-align:center;font-size:1rem">
+    <div class="container">
+        <div class="wxtip">
+            <span class="wxtip-icon"></span>
+            <p class="wxtip-txt">点击右上角<br />选择在浏览器中打开</p>
+        </div>
+        <div class="description">
+        </div>
+        <div class="download">
+            <img src="imgs/feye-icon.jpg" alt="icon" class="icon">
+            <br>
+            <div class="description">
+                版本：1.6.1<br>
+                更新时间：2018-12-06<br>
+            </div>
+            <button class="install">
+                点击安装
+            </button>
+            <br>
+            <span id="device"></span>
+            <br>
+            <br><br><br>
+        </div>
+        <div class="download-tips">
+            iOS版本安装说明<br>
+            进入app如果弹出“未受信任的企业级<br>
+            开发者”，请按如下设置操作<br>
+            <img src="./imgs/1.jpg" alt="1.jpg"><br>
+            <br>
+            <img src="./imgs/2.jpg" alt="2.jpg"><br>
+            <br>
+            <img src="./imgs/3.jpg" alt="3.jpg"><br>
+            <br>
+            <img src="./imgs/4.jpg" alt="4.jpg"><br>
+            <br>
+            <img src="./imgs/5.jpg" alt="5.jpg"><br>
+            <br>
+            <img src="./imgs/6.jpg" alt="6.jpg"><br>
+            <br>
+            <img src="./imgs/7.jpg" alt="7.jpg"><br>
+            <br>
+        </div>
+        <div class="update-tips">
+            <h5>更新说明</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing. accusamus molestias pariatur sunt non, eos
+                asperiores! Debitis, illum blanditiis.</p>
+        </div>
+
+        <div class="history-version">
+            <h5>历史版本</h5>
+            <ul>
+                <li>history</li>
+                <li>history</li>
+                <li>history</li>
+                <li>history</li>
+                <li>history</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
